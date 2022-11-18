@@ -31,10 +31,48 @@ describe('SignUp page', () => {
             expect(input).toBeInTheDocument()
         })
 
-        it('has an password input', () => {
+        it('has an email type for email input', () => {
+            render(<SignUp/>)
+            const input = screen.getByLabelText('Email:')
+            // Tests what the type of an input is.
+            expect(input.type).toBe('email')
+        })
+
+        it('has a password input', () => {
             render(<SignUp/>)
             const input = screen.getByLabelText('Password:')
             expect(input).toBeInTheDocument()
+        })
+
+        it('has a password type for password input', () => {
+            render(<SignUp/>)
+            const input = screen.getByLabelText('Password:')
+            // Tests what the type of an input is.
+            expect(input.type).toBe('password')
+        })
+
+        it('has a password confirmation input', () => {
+            render(<SignUp/>)
+            const input = screen.getByLabelText('Password Confirmation:')
+            expect(input).toBeInTheDocument()
+        })
+
+        it('has a password type for password confirmation input', () => {
+            render(<SignUp/>)
+            const input = screen.getByLabelText('Password Confirmation:')
+            expect(input.type).toBe('password')
+        })
+
+        it('has a submit button', () => {
+            render(<SignUp/>)
+            const button = screen.queryByRole('button', {name: 'Sign Up'})
+            expect(button).toBeInTheDocument()
+        })
+
+        it('disables button initially', () => {
+            render(<SignUp/>)
+            const button = screen.queryByRole('button', {name: 'Sign Up'})
+            expect(button).toBeDisabled()
         })
     })
 })

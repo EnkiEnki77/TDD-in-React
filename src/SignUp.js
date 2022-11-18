@@ -17,6 +17,11 @@ const SignUp = () => {
                 Password:
                 <input type="password" placeholder="Enter password..." required/>
             </label>
+            <label>
+                Password Confirmation:
+                <input type="password" placeholder="Enter password confirmation..." required/>
+            </label>
+            <button disabled>Sign Up</button>
         </form>
     </>
   )
