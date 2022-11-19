@@ -1,5 +1,7 @@
 import SignUp from "./SignUp";
 import {render, screen} from "@testing-library/react"
+import userEvent from "@testing-library/user-event";
+import axios from 'axios'
 
 // describe groups multiple tests together into a test suite. An example of when to use describe is to group together all the tests
 // for a specific page. 
@@ -75,4 +77,37 @@ describe('SignUp page', () => {
             expect(button).toBeDisabled()
         })
     })
-})
+
+    describe('Interactions', () => {
+        it('enables the button when password and password confirmation match', () => {
+            render(<SignUp/>)
+
+            const password = screen.getByLabelText('Password:')
+            const passwordConfirmation = screen.getByLabelText('Password Confirmation:')
+
+            // To simulate events utilize the userEvent object.
+            userEvent.type(password, 'P4ssword')
+            userEvent.type(passwordConfirmation, 'P4ssword')
+
+            const button = screen.queryByRole('button', {name: 'Sign Up'})
+            // can use the not propserty on expects to switch the meaning of a boolean oriented method such as toBeDisabled.
+            expect(button).not.toBeDisabled()
+        })
+
+        it('submits form on button click', () => {
+            render(<SignUp/>)
+            const user = screen.getByLabelText('Username:')
+            const email = screen.getByLabelText('Email:')
+            const password = screen.getByLabelText('Password:')
+            const passwordConfirmation = screen.getByLabelText('Password Confirmation:')
+            const button = screen.queryByRole('button', {name: 'Sign Up'})
+
+            userEvent.type(user, 'user1')
+            userEvent.type(email, 'user1@gmail.com')
+            userEvent.type(password, 'P4ssword')
+            userEvent.type(passwordConfirmation, 'P4ssword')
+
+            expect(button).not.toBeDisabled()
+        })
+    })
+}) 
